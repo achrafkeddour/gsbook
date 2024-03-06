@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Example, replace with your CSS file -->
+    
+</head>
+<body> 
+    <h2>Welcome <%= user.name %></h2>
+    <div class="container">
+        <h1>Profile</h1>
+    <p>Age: <%= user.age %></p>
+    <p>Bio: <%= user.bio %></p>
+    </div>
+    <div id="chat">
+        <ul id="messages">
+            <% messages.forEach(message => { %>
+                <li style="background-color: #00ff5e;"><%= message.username %>: <%= message.message %></li>
+            <% }); %>
+        </ul>
+        <form id="messageForm">
+            <input id="m" autocomplete="off" required /><button class="send">Send</button>
+        </form>
+    </div>
+    <div class="pic"><img src="/profile.png" alt=""></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        // Login with user's username
+        socket.emit('login', '<%= username %>');
+
+        // Receive messages from server and display them
+        socket.on('message', function(data) {
+            var item = document.createElement('li');
+            item.textContent = data.username + ': ' + data.message;
+            item.style.backgroundColor = '#e8eaf5';
+                item.style.margin = '10px 0';  
+                item.style.padding = '10px 5px'; 
+                item.style.borderRadius = '10px';
+                item.style.listStyleType = 'none';
+            document.getElementById('messages').appendChild(item);
+        });
+
+        // Send message to server when form is submitted
+        document.getElementById('messageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var input = document.getElementById('m');
+            socket.emit('message', input.value);
+            input.value = '';
+            return false;
+        });
+
+        // Request message history from server when page loads
+        socket.emit('messageHistory');
+
+        // Receive message history from server and display it
+        socket.on('messageHistory', function(messages) {
+            var messageList = document.getElementById('messages');
+            messageList.innerHTML = ''; // Clear existing messages
+            messages.forEach(function(message) {
+                var item = document.createElement('li');
+                item.textContent = '';
+               
+            });
+        });
+
+        
+    </script>
+</body>
+</html>
