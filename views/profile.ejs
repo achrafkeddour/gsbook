@@ -11,8 +11,13 @@
     <h2>Welcome <%= user.name %></h2>
     <div class="container">
         <h1>Profile</h1>
-    <p>Age: <%= user.age %></p>
-    <p>Bio: <%= user.bio %></p>
+        <div class="phot"><img src="<%= user.imageUrl %>" alt="<%= user.name %>"></div>
+        <p>Date of Birth: <%= user.datenais %></p>
+        <p>Grade1 : <%= user.moys1 %></p>
+        <p>Gender: <%= user.gender %></p>
+        <p>Preparation: <%= user.prepa %></p>
+        <p>Facebook: <%= user.fb %></p>
+        <p>Location: <%= user.lives %></p>        
     </div>
     <div id="chat">
         <ul id="messages">
@@ -24,8 +29,7 @@
             <input id="m" autocomplete="off" required /><button class="send">Send</button>
         </form>
     </div>
-    <div class="pic"><img src="/profile.png" alt=""></div>
-    <script src="/socket.io/socket.io.js"></script>
+       <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
 
