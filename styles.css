@@ -8,7 +8,8 @@ body{
 h2 {
     margin-left: 5%;
     text-align: center;
-    width:fit-content
+    width:fit-content;
+    font-size: 30px;
 }
 h1 {
     display: inline-block;
@@ -16,11 +17,16 @@ h1 {
     width:fit-content;
 }
 .container {
-    background-color: #ff00004c;
+    font-weight: bolder;
+    position:relative;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px 10px #000;
     padding: 0px 0px 0px 40px ;
     display: block;
-    margin: 0 auto;
-    width:50vw;
+    margin: 0  15vw  0 auto;
+    width:47vw;
+    height:35vw;
     display:flex;
     flex-direction: column;
 }
@@ -38,6 +44,7 @@ h1 {
     width: 20vw;
     position: fixed;
     bottom: 0;
+    left:40px;
     padding: 10px;
     height: 50vh;
     /* overflow-y: auto; */
@@ -65,8 +72,8 @@ h1 {
 #chat {
     width: 80vw;
     box-shadow: 0 0 4px 4px #ccaae723;
-    margin: 0 auto 20px 13px;
-    
+    margin: 0 auto 20px auto;
+    left:20px;
 }
 
 #m {
@@ -77,19 +84,40 @@ h1 {
 body {
     margin:0;
 }
+
 .container {
-    width:60vw;
+    position: static;
+    width: fit-content;
     display: block;
     margin: 0 auto;
+    height: fit-content;
+    padding-bottom: 20px;
+}
+h1 {
+    padding-bottom: 110px;
+}
+.phot , .phot img{
+    width: 150px !important;
+    height: 150px !important; 
+    margin: 80px auto 0px auto;
+    display: block;
 }
 }
+
 .send {
     background-color: #3646de;
     padding:10px 10px;
     text-align: center;
     color: #fff;
 }
-.qq {
-    background-color: #00ff5e;
-    border-radius: 10px;
+.phot , .phot img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    
+}
+.phot {
+    position: absolute;
+    top:10%;
+    right: 15%;
 }
