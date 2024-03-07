@@ -67,6 +67,9 @@ h1 {
     width: 15vw;
 
 }
+#toggleButton {
+    visibility: hidden;
+}
 @media (max-width: 700px)
 {
 #chat {
@@ -91,21 +94,30 @@ body {
     display: block;
     margin: 0 auto;
     height: fit-content;
-    padding-bottom: 20px;
+    
+    padding: 5px 20px 10px;
 }
 h1 {
-    padding-bottom: 110px;
+    padding: 0px 30px 158px;
+    font-size: 46px;
 }
 .phot , .phot img{
     width: 150px !important;
     height: 150px !important; 
-    margin: 80px auto 0px auto;
+    margin: 80px 19px 0px auto;
     display: block;
 }
+#toggleButton {
+    visibility: visible;
+    position:absolute;
+    z-index: 999;
+    top:10px
+}
+
 }
 
 .send {
-    background-color: #3646de;
+    background-color: #21d827;
     padding:10px 10px;
     text-align: center;
     color: #fff;
