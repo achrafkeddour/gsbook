@@ -19,6 +19,8 @@
         <p>Facebook: <%= user.fb %></p>
         <p>Location: <%= user.lives %></p>        
     </div>
+    <button id="toggleButton" style="padding: 10px 5px; background-color: rgb(62, 81, 255); color: #fff; border: none; border-radius: 7px;">
+        Hide Chat</button>
     <div id="chat">
         <ul id="messages">
             <% messages.forEach(message => { %>
@@ -71,7 +73,20 @@
             });
         });
 
-        
+            const chatElement = document.getElementById('chat');
+    const toggleButton = document.getElementById('toggleButton');
+
+    toggleButton.addEventListener('click', function() {
+        if (chatElement.style.visibility === 'visible') {
+            chatElement.style.visibility = 'hidden';
+            toggleButton.textContent = 'View Chat';
+            toggleButton.style.backgroundColor = '#2721d8'
+        } else {
+            chatElement.style.visibility = 'visible';
+            toggleButton.textContent = 'Hide Chat';
+            toggleButton.style.backgroundColor = 'rgb(62, 81, 255)'
+        }
+    });
     </script>
 </body>
 </html>
