@@ -254,7 +254,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-    const username = req.body.ism;
+    const username = req.body.ism.toLowerCase();
     const password = req.body.password;
 
     const user = users.find(u => u.username === username && u.password === password);
