@@ -23,7 +23,7 @@ const indexHtml = fs.readFileSync('index.html', 'utf8');
 
 const users = [
     { username: 'user1', password: 'pass1', profile: { name: 'Keddour Achraf',datenais: '13/08/2003',moys1: 13.16,gender: 'Male',prepa: 'ENPO',fb: 'Achraf Keddour',lives: 'Jijel', imageUrl: 'profile.png' } },
-    { username: 'user2', password: 'pass2', profile: { name: 'aissa', age: 25, bio: 'you are the second...', imageUrl: 'site.png' }},
+
     {
         username: 'keddour',
         password: '13082003',
@@ -193,7 +193,7 @@ const users = [
         imageUrl: '' },
     },
     {
-        username: 'halima-filali',
+        username: 'halima',
         password: '09102003',
         profile: {name: 'Halima-filali Manal',datenais: '09/10/2003',moys1: 12.26,gender: 'Female',prepa: 'ENPO',fb: 'Manęl Hą Fĩ',lives: 'Chlef',
         imageUrl: '' },
@@ -229,7 +229,7 @@ const users = [
         imageUrl: '' },
     },
     {
-        username: 'zemalach megueni',
+        username: 'zemalach',
         password: '14042003',
         profile: {name: 'Zemalach Megueni Mohamed Faycal',datenais: '14/04/2003',moys1: 14.07,gender: 'Male',prepa: 'ENPO',fb: 'Mohamed Zm',lives: 'Mascara',
         imageUrl: '' },
@@ -243,7 +243,14 @@ const users = [
     
 
 ];
-    
+
+users.forEach(user => {
+    if (user.profile.gender === 'Male') {
+        user.profile.imageUrl = '/imgs/male.png';
+    } else if (user.profile.gender === 'Female') {
+        user.profile.imageUrl = '/imgs/female.png';
+    }
+});
 
 
 // Object to store chat messages for each user
