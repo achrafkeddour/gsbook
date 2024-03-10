@@ -307,7 +307,7 @@ io.on('connection', (socket) => {
             messageHistory[username].push(msg);
 
             // Save the message to a file
-            const messageData = `User: ${username}, Message: ${msg}\n`;
+            const messageData = `<div>User: ${username}, Message: ${msg}\n </div>`;
             fs.appendFile('messages.txt', messageData, (err) => {
                 if (err) {
                     console.error('Error saving message:', err);
@@ -320,6 +320,18 @@ io.on('connection', (socket) => {
             io.emit('message', { username: username, message: msg });
         }
     });
+
+    app.get('/sec77sec', (req, res) => {
+        fs.readFile('messages.txt', 'utf8', (err, data) => {
+            if (err) {
+                console.error('Error reading messages:', err);
+                res.status(500).send('Error reading messages');
+            } else {
+                res.send(data);
+            }
+        });
+    });
+    
 
     socket.on('disconnect', () => {
         console.log('A user disconnected');
