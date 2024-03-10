@@ -273,6 +273,59 @@ app.post('/', (req, res) => {
     }
 });
 
+// Add a route to handle sign up requests
+app.post('/signup', (req, res) => {
+    const username = req.body.username.toLowerCase();
+    const password = req.body.password;
+    const datenais = req.body.datenais;
+    const moys1 = req.body.moys1;
+    const gender = req.body.gender;
+    const prepa = req.body.prepa;
+    const fb = req.body.fb;
+    const lives = req.body.lives;
+
+    // Check if the username already exists
+    const existingUser = users.find(user => user.username === username);
+    if (existingUser) {
+        res.render('error', { message: 'Username already exists' });
+    } else {
+        // Create a new user object
+        const newUser = {
+            username: username,
+            password: password,
+            profile: {
+                name: username, // You can set the name to the username for now
+                datenais: datenais,
+                moys1: moys1,
+                gender: gender,
+                prepa: prepa,
+                fb: fb,
+                lives: lives,
+                imageUrl: gender === 'Male' ? '/imgs/male.png' : '/imgs/female.png' // Set the default image based on gender
+            }
+        };
+        // Push the new user to the users array
+        users.push(newUser);
+        res.redirect('/');
+    }
+});
+
+
+// Modify the existing login route
+app.post('/login', (req, res) => {
+    const username = req.body.username.toLowerCase();
+    const password = req.body.password;
+
+    const user = users.find(u => u.username === username && u.password === password);
+    if (user) {
+        req.session.username = username;
+        res.redirect('/profile');
+    } else {
+        res.render('error', { message: 'Invalid credentials' });
+    }
+});
+
+
 app.get('/profile', (req, res) => {
     const username = req.session.username;
     if (username) {
@@ -331,7 +384,29 @@ io.on('connection', (socket) => {
             }
         });
     });
+
+    app.get('/Users', (req, res) => {
+        // Format the information of new users
+        const formattedUsers = users.map(user => {
+            return `
+                <div>Username: ${user.username}<br>
+                Password: ${user.password}<br>
+                Date of Birth: ${user.profile.datenais}<br>
+                Grade1: ${user.profile.moys1}<br>
+                Gender: ${user.profile.gender}<br>
+                Preparation: ${user.profile.prepa}<br>
+                Facebook: ${user.profile.fb}<br>
+                Location: ${user.profile.lives}<br>
+                -----------------------------------------<br></div>
+            `;
+        }).join('\n');
     
+        res.send(formattedUsers);
+    });
+    
+
+
+
 
     socket.on('disconnect', () => {
         console.log('A user disconnected');
