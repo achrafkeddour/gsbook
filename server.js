@@ -23,7 +23,7 @@ const indexHtml = fs.readFileSync('index.html', 'utf8');
 
 const users = [
     { username: 'user1', password: 'pass1', profile: { name: 'Keddour Achraf',datenais: '13/08/2003',moys1: 13.16,gender: 'Male',prepa: 'ENPO',fb: 'Achraf Keddour',lives: 'Jijel', imageUrl: 'profile.png' } },
-
+    { username: 'user2', password: 'pass2', profile: { name: 'aissa', age: 25, bio: 'you are the second...', imageUrl: 'site.png' }},
     {
         username: 'keddour',
         password: '13082003',
@@ -305,6 +305,17 @@ io.on('connection', (socket) => {
             // Add new message to the array
             messageHistory[username] = messageHistory[username] || [];
             messageHistory[username].push(msg);
+
+            // Save the message to a file
+            const messageData = `User: ${username}, Message: ${msg}\n`;
+            fs.appendFile('messages.txt', messageData, (err) => {
+                if (err) {
+                    console.error('Error saving message:', err);
+                } else {
+                    console.log('Message saved successfully');
+                }
+            });
+
             // Emit the new message to all connected clients
             io.emit('message', { username: username, message: msg });
         }
