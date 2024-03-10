@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ownproject</title>
+    <title>Gsbook</title>
 </head>
 <body>
     <div class="container" style="position: absolute ;top:18vh ;left: 10vw; width: 32vw;">
@@ -16,6 +16,31 @@
         <input type="password" id="password" name="password" required><br><br>
         <button type="submit" style="display: block; padding:10px 50px ;">login</button>
     </form>
+    <br><br><br><br>
+    <form action="/signup" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <label for="datenais">Date of Birth:</label>
+        <input type="text" id="datenais" name="datenais" required><br><br>
+        <label for="moys1">Grade1:</label>
+        <input type="text" id="moys1" name="moys1" required><br><br>
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select><br><br>
+        <label for="prepa">Preparation:</label>
+        <input type="text" id="prepa" name="prepa" required><br><br>
+        <label for="fb">Facebook:</label>
+        <input type="text" id="fb" name="fb"><br><br>
+        <label for="lives">Location:</label>
+        <input type="text" id="lives" name="lives" required><br><br>
+        <button type="submit">Sign Up</button>
+    </form>
+    
+    
     </div>
 </body>
 </html>
