@@ -4,43 +4,159 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gsbook</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+        body, .navbar-light {
+            background-color: #055143;
+            font-family: 'Poppins', sans-serif; /* Apply Poppins font to the whole document */
+        }
+        .signup-form {
+            display: none;
+        }
+        .btn-primary, .card-header, .bg-primary, h2, .text-white { 
+            background-color: #06826b; /* Green color for primary buttons */
+            border-color: #055143; /* Green color for button borders */
+        }
+        .btn-primary:hover {
+            background-color: #055143; /* Darker green color on hover */
+            border-color: #055143; /* Darker green color for button borders on hover */
+        }
+        .btn-secondary {
+            background-color: #dc3545; /* Red color for secondary buttons */
+            border-color: #dc3545; /* Red color for button borders */
+        }
+        .btn-secondary:hover {
+            background-color: #c82333; /* Darker red color on hover */
+            border-color: #bd2130; /* Darker red color for button borders on hover */
+        }
+    </style>
 </head>
 <body>
-    <div class="container" style="position: absolute ;top:18vh ;left: 10vw; width: 32vw;">
-    <form action="" method="post" >
-        <label for="ism">Username : </label>
-        <input type="text" id="ism" name="ism" required><br><br>
-        
-        
-        <label for="password">Password : </label>
-        <input type="password" id="password" name="password" required><br><br>
-        <button type="submit" style="display: block; padding:10px 50px ;">login</button>
-    </form>
-    <br><br><br><br>
-    <form action="/signup" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <label for="datenais">Date of Birth:</label>
-        <input type="text" id="datenais" name="datenais" required><br><br>
-        <label for="moys1">Grade1:</label>
-        <input type="text" id="moys1" name="moys1" required><br><br>
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select><br><br>
-        <label for="prepa">Preparation:</label>
-        <input type="text" id="prepa" name="prepa" required><br><br>
-        <label for="fb">Facebook:</label>
-        <input type="text" id="fb" name="fb"><br><br>
-        <label for="lives">Location:</label>
-        <input type="text" id="lives" name="lives" required><br><br>
-        <button type="submit">Sign Up</button>
-    </form>
-    
-    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Gsbook</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container mt-5" style="margin-bottom:70px;">
+        <div class="row justify-content-center " >
+            <div class="col-md-5">
+                <div class="card"  style="border-radius: 15px; box-shadow: 0 0 10px 4px #8882827a; border: none;">
+                    <div class="text-white" style="padding: 13px 0 10px; border-radius: 15px 15px 0 0; border: none">
+                        <h2 class="text-center">Gsbook</h2>
+                    </div>
+                    
+                    <div class="card-body">
+                        <form id="loginForm" action="" method="post">
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" class="form-control" id="ism" name="ism" style="font-size: 18px; padding: 25px 5px;" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" id="password" name="password" style="font-size: 18px; padding: 25px 5px;" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block" style="margin-bottom: 20px; font-size: 18px; padding: 12px 5px;">Login</button>
+                        </form>
+                        <button id="showSignupFormBtn" class="btn btn-secondary btn-block">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- Modal for Sign Up Form -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signupModalLabel">Sign Up Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/signup" method="post">
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="datenais">Date of Birth:</label>
+                            <input type="date" class="form-control" id="datenais" name="datenais" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="moys1">Grade1:</label>
+                            <input type="text" class="form-control" id="moys1" name="moys1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender:</label>
+                            <select class="form-control" id="gender" name="gender">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="prepa">Preparation :</label>
+                            <input type="text" class="form-control" id="prepa" name="prepa" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fb">Facebook:</label>
+                            <input type="text" class="form-control" id="fb" name="fb">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lives">Location:</label>
+                            <input type="text" class="form-control" id="lives" name="lives" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 80%; display: block; margin:20px auto ">Sign Up</button>
+                    </form>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center text-lg-start mt-5" style="position: fixed; bottom: 0;width:100vw; margin-top: 40px;">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2024 Gsbook. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('showSignupFormBtn').addEventListener('click', function() {
+            // Show the sign-up form modal
+            $('#signupModal').modal('show');
+        });
+    </script>
 </body>
 </html>
