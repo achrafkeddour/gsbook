@@ -32,14 +32,27 @@
             background-color: #c82333; /* Darker red color on hover */
             border-color: #bd2130; /* Darker red color for button borders on hover */
         }
+
+        @media (max-width: 700px) {
+           .navbar-brand , .nav-link , .navbar-toggler-icon {
+            color: white !important;
+            }
+            .navbar {
+                background-color: #06826b40 !important;
+            }
+            footer > .bg-light {
+                color:white !important;
+                background-color: #06826b !important;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light text-white" >
         <a class="navbar-brand" href="#">Gsbook</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon fa-bars"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -142,8 +155,8 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-light text-center text-lg-start mt-5" style="position: fixed; bottom: 0;width:100vw; margin-top: 40px;">
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <footer class=" text-center  mt-5" style="background-color: #00000000; position: fixed; bottom: 0;width:100vw; margin-top: 40px;">
+        <div class="text-center p-3 bg-light fin">
             © 2024 Gsbook. All rights reserved.
         </div>
     </footer>
