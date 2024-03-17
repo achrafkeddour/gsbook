@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Example, replace with your CSS file -->
+</head>
+<body> 
+    <h2>Welcome <%= user.name %></h2>
+    <div class="container">
+        <h1>Profile</h1>
+        <div class="phot"><img src="<%= user.imageUrl %>" alt="<%= user.name %>"></div>
+        <p>Date of Birth: <%= user.datenais %></p>
+        <p>Grade1 : <%= user.moys1 %></p>
+        <p>Gender: <%= user.gender %></p>
+        <p>Preparation: <%= user.prepa %></p>
+        <p>Facebook: <%= user.fb %></p>
+        <p>Location: <%= user.lives %></p>        
+    </div>
+    <!-- Broadcast messages -->
+    <div id="broadcastMessages"></div>
+    
+    <!-- Private messages -->
+    <div id="privateChats"></div>
+    
+    <!-- Input fields for sending messages -->
+    <input type="text" id="messageInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send Broadcast Message</button>
+    
+    <div id="privateMessage">
+        <input type="text" id="recipientInput" placeholder="Recipient's name">
+        <input type="text" id="privateMessageInput" placeholder="Type your private message...">
+        <button onclick="sendPrivateMessage()">Send Private Message</button>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        // Login with user's username
+        socket.emit('login', '<%= username %>');
+
+        // Set the username
+        socket.emit('new-user', '<%= username %>');
+
+     // Send a message to all users (broadcast message)
+function sendMessage() {
+    const message = document.getElementById('messageInput').value;
+    socket.emit('send-broadcast-message', message);
+    document.getElementById('messageInput').value = '';
+}
+
+// Function to send a private message to a specific user
+function sendPrivateMessage() {
+    const to = document.getElementById('recipientInput').value;
+    const message = document.getElementById('privateMessageInput').value;
+    socket.emit('private-message', { to, message });
+    
+}
+
+        // Display broadcast message in the chat window
+        function displayBroadcastMessage(from, message) {
+            const broadcastMessagesDiv = document.getElementById('broadcastMessages');
+            const newMessage = document.createElement('div');
+            newMessage.textContent = `${from}: ${message}`;
+            broadcastMessagesDiv.appendChild(newMessage);
+        }
+
+// Function to display private chat for a user
+function displayPrivateChat(username) {
+    const privateChatsDiv = document.getElementById('privateChats');
+    // Check if the private chat div already exists for this user
+    let privateChatDiv = document.getElementById(`${username}-private-chat`);
+    if (!privateChatDiv) {
+        // Create a new div for the private chat
+        privateChatDiv = document.createElement('div');
+        privateChatDiv.id = `${username}-private-chat`;
+        privateChatDiv.classList.add('private-chat'); // Add a class for styling
+        privateChatsDiv.appendChild(privateChatDiv);
+    }
+    return privateChatDiv;
+}
+
+        // Receive broadcast messages from the server
+        socket.on('broadcast-message', ({ from, message }) => {
+            displayBroadcastMessage(from, message);
+        });
+
+        // Receive private messages from the server
+socket.on('private-message', ({ from, to, message }) => {
+    // Display the message in the appropriate private chat div
+    const privateChatDiv = displayPrivateChat(from);
+    const newMessage = document.createElement('div');
+    newMessage.textContent = `[${from}]: ${message}`;
+    privateChatDiv.appendChild(newMessage);
+});
+    </script>
+</body>
+</html>
